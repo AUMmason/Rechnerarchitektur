@@ -4,7 +4,7 @@ use work.alu_package.all;
 
 entity alu is
   generic(
-    WIDTH : integer := 32;
+    WIDTH : integer := 32
   );
   port(signal a, b :      in     std_ulogic_vector(WIDTH - 1 downto 0);
        signal mode :      in     std_ulogic_vector(2 downto 0);
@@ -13,13 +13,13 @@ entity alu is
       );
 end;
 
-architecture rtl of alu_ea_struct is
+architecture rtl of alu is
   constant MODE_BIT_WIDTH : integer := 3;
-  signal mux_data : std_ulogic_vector_array(2**MODE_BIT_WIDTH);
+  signal mux_data : std_ulogic_vector_array(2**MODE_BIT_WIDTH - 1 downto 0);
   signal cr_adder_out : std_ulogic_vector(WIDTH - 1 downto 0);
   signal c_in : std_ulogic;
   signal b_calc : std_ulogic_vector(WIDTH - 1 downto 0);
-  signal b_mux : std_ulogic_vector_array(2);
+  signal b_mux : std_ulogic_vector_array(1 downto 0); -- 2 bit
 begin
   
   -- Addition Subtraction:
@@ -32,8 +32,8 @@ begin
       INPUT_BIT_WIDTH => WIDTH,
       SEL_BIT_WIDTH => 1
     )
-    port (
-      sel_i => std_ulogic_vector(resize(unsigned(mode(2)), 1)),
+    port map(
+      sel_i(0) => mode(2),
       data_i => b_mux,
       data_o => b_calc
     );
@@ -41,8 +41,8 @@ begin
   MUX_SET_c_in : entity work.mux_1_ea
     port map(
       sel_i => mode(2),
-      a_i => std_ulogic('0'),
-      b_i => std_ulogic('1'),
+      a_i => '0',
+      b_i => '1',
       data_o => c_in
     );
   
@@ -83,7 +83,7 @@ begin
   mux_data(5) <= a AND (NOT b);         -- 101
   mux_data(6) <= cr_adder_out;          -- 110 (a - b)
   mux_data(7) <=                        -- 111 (SLT)
-    std_ulogic_vector(0 => cr_adder_out(WIDTH - 1), others => 0)
+    (0 => cr_adder_out(WIDTH - 1), others => '0');  
   -- Note: Simple SLT Operation implemented, as it does not consider overflow
 
 end architecture;

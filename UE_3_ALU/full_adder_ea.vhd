@@ -5,8 +5,8 @@ use ieee.math_real.all;
 
 entity full_adder_ea is
   port (
-    signal a_i, b_i, c_i : input std_ulogic;
-    signal r0_o, r1_o : output std_ulogic;
+    signal a_i, b_i, c_i : in std_ulogic;
+    signal r0_o, r1_o : out std_ulogic
   );
 end entity full_adder_ea;
 

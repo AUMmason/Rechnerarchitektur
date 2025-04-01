@@ -4,9 +4,9 @@ use work.alu_package.all;
 
 entity mux_1_ea is
   port (
-    signal sel_i : input std_ulogic;
-    signal a_i, b_i : input std_ulogic;
-    signal data_o : output std_ulogic;
+    signal sel_i : in std_ulogic;
+    signal a_i, b_i : in std_ulogic;
+    signal data_o : out std_ulogic
   );
 end entity;
 

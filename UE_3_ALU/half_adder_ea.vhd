@@ -5,10 +5,10 @@ use ieee.math_real.all;
 
 entity half_adder_ea is
   port (
-    signal a_i : input std_ulogic;
-    signal b_i : input std_ulogic;
-    signal r0_o : output std_ulogic;
-    signal r1_o : output std_ulogic;
+    signal a_i : in std_ulogic;
+    signal b_i : in std_ulogic;
+    signal r0_o : out std_ulogic;
+    signal r1_o : out std_ulogic
   );
 end entity half_adder_ea;
 

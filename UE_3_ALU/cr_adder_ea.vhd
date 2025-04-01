@@ -8,18 +8,16 @@ entity cr_adder_ea is
     BIT_WIDTH : integer := 32
   );
   port (
-    signal a_i, b_i : input std_ulogic_vector(BIT_WIDTH - 1 downto 0);
-    signal c_i : input std_ulogic;
-    signal c_o : output std_ulogic; 
-    signal r_o : output std_ulogic_vector(BIT_WIDTH - 1 downto 0);
+    signal a_i, b_i : in std_ulogic_vector(BIT_WIDTH - 1 downto 0);
+    signal c_i : in std_ulogic;
+    signal c_o : out std_ulogic; 
+    signal r_o : out std_ulogic_vector(BIT_WIDTH - 1 downto 0)
   );
 end entity cr_adder_ea;
 
 architecture rtl of cr_adder_ea is
-  signal carry : input std_ulogic_vector(BIT_WIDTH - 1 downto 0);
+  signal carry : std_ulogic_vector(BIT_WIDTH - 1 downto 0);
 begin
-  
-  carry(0) <= c_i;
   
   full_adder_ea_0: entity work.full_adder_ea
     port map(

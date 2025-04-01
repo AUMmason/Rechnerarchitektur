@@ -1,5 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.math_real.all;
 use work.alu_package.all;
 
 entity m_bit_n_mux_ea is
@@ -8,9 +10,9 @@ entity m_bit_n_mux_ea is
     INPUT_BIT_WIDTH : integer := 32
     );
   port (
-    signal sel_i : input std_ulogic_vector(SEL_BIT_WIDTH - 1 downto 0);
-    signal data_i : input std_ulogic_vector_array(2**SEL_BIT_WIDTH);
-    signal data_o : output std_ulogic_vector(INPUT_BIT_WIDTH - 1 downto 0);
+    signal sel_i : in std_ulogic_vector(SEL_BIT_WIDTH - 1 downto 0);
+    signal data_i : in std_ulogic_vector_array(2**SEL_BIT_WIDTH - 1 downto 0);
+    signal data_o : out std_ulogic_vector(INPUT_BIT_WIDTH - 1 downto 0)
   );
 end entity;
 

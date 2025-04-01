@@ -5,5 +5,5 @@ use ieee.math_real.all;
 
 package alu_package is
   constant INPUT_BIT_WIDTH : integer := 32;
-  type std_ulogic_vector_array is array(natural <range>) of std_ulogic_vector(INPUT_BIT_WIDTH - 1 downto 0);
+  type std_ulogic_vector_array is array (natural range <>) of std_ulogic_vector(INPUT_BIT_WIDTH - 1 downto 0);
 end package alu_package;
