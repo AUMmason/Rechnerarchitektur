@@ -24,7 +24,7 @@ begin
   
   HA2: entity work.half_adder_ea(rtl)
   port map(
-    a_i => HA1_r1,
+    a_i => HA1_r0,
     b_i => c_i,
     r0_o => r0_o,
     r1_o => HA2_r1

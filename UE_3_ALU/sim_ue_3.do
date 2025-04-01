@@ -17,15 +17,15 @@ vsim -voptargs="\+acc" -t ns testbench -wlf testbench_sim.wlf
 add wave -divider Inputs
 
 add wave -noupdate -color {Cornflower Blue} -radix symbolic /testbench/f
-add wave -noupdate -color {Cornflower Blue} -radix symbolic /testbench/a
-add wave -noupdate -color {Cornflower Blue} -radix symbolic /testbench/b
+add wave -noupdate -color {Cornflower Blue} -radix hexadecimal /testbench/a
+add wave -noupdate -color {Cornflower Blue} -radix hexadecimal /testbench/b
 
 # Label
 add wave -divider Outputs
 
-add wave -noupdate -radix symbolic /testbench/y
+add wave -noupdate -radix hexadecimal /testbench/y
 add wave -noupdate -radix symbolic /testbench/neg
 
-run 2 us
+run 100 us
 # Set Zoom Level {from ms} {to ms}
-WaveRestoreZoom {0 ms} {1 us}
+WaveRestoreZoom {0 us} {1 us}

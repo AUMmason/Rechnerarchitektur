@@ -16,17 +16,19 @@ end;
 architecture rtl of alu is
   constant MODE_BIT_WIDTH : integer := 3;
   signal mux_data : std_ulogic_vector_array(2**MODE_BIT_WIDTH - 1 downto 0);
+  signal data_out : std_ulogic_vector(WIDTH - 1 downto 0);
   signal cr_adder_out : std_ulogic_vector(WIDTH - 1 downto 0);
   signal c_in : std_ulogic;
   signal b_calc : std_ulogic_vector(WIDTH - 1 downto 0);
-  signal b_mux : std_ulogic_vector_array(1 downto 0); -- 2 bit
+  signal b_mux : std_ulogic_vector_array(1 downto 0);
 begin
-  
-  -- Addition Subtraction:
+
+  -- Addition / Subtraction
 
   b_mux(0) <= b;
   b_mux(1) <= NOT b;
 
+  -- Invert b for performing subtraction
   MUX_INV_B : entity work.m_bit_n_mux_ea
     generic map(
       INPUT_BIT_WIDTH => WIDTH,
@@ -38,6 +40,7 @@ begin
       data_o => b_calc
     );
 
+  -- Sets c_in for cr_adder depending on addition (= 0) or subtraction (= 1)
   MUX_SET_c_in : entity work.mux_1_ea
     port map(
       sel_i => mode(2),
@@ -58,11 +61,7 @@ begin
       r_o => cr_adder_out
     );
 
-  -- neg Output:
-
-  neg <= cr_adder_out(WIDTH - 1); -- Extracts sign bit
-
-  -- Output Selection
+  -- Operation Selection
 
   MUX_OUTPUT : entity work.m_bit_n_mux_ea
     generic map(
@@ -72,7 +71,7 @@ begin
     port map(
       sel_i => mode,
       data_i => mux_data,
-      data_o => result
+      data_o => data_out
     );
 
   mux_data(0) <= a OR b;                -- 000 
@@ -85,5 +84,10 @@ begin
   mux_data(7) <=                        -- 111 (SLT)
     (0 => cr_adder_out(WIDTH - 1), others => '0');  
   -- Note: Simple SLT Operation implemented, as it does not consider overflow
+
+  -- Output
+  
+  neg <= data_out(WIDTH - 1); -- Extracts sign bit
+  result <= data_out;
 
 end architecture;

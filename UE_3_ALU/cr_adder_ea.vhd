@@ -18,7 +18,7 @@ end entity cr_adder_ea;
 architecture rtl of cr_adder_ea is
   signal carry : std_ulogic_vector(BIT_WIDTH - 1 downto 0);
 begin
-  
+
   full_adder_ea_0: entity work.full_adder_ea
     port map(
       a_i => a_i(0),
