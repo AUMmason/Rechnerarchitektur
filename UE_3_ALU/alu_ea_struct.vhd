@@ -27,6 +27,8 @@ begin
 
   b_mux(0) <= b;
   b_mux(1) <= NOT b;
+  -- Sets c_in for cr_adder depending on addition (= 0) or subtraction (= 1)
+  c_in <= mode(2);
 
   -- Invert b for performing subtraction
   MUX_INV_B : entity work.m_bit_n_mux_ea
@@ -39,16 +41,7 @@ begin
       data_i => b_mux,
       data_o => b_calc
     );
-
-  -- Sets c_in for cr_adder depending on addition (= 0) or subtraction (= 1)
-  MUX_SET_c_in : entity work.mux_1_ea
-    port map(
-      sel_i => mode(2),
-      a_i => '0',
-      b_i => '1',
-      data_o => c_in
-    );
-  
+    
   cr_adder : entity work.cr_adder_ea
     generic map(
       BIT_WIDTH => WIDTH
