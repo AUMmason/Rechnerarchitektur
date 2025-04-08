@@ -1,7 +1,6 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-
 entity n_bit_1_mux_ea is
   generic(
     WIDTH : integer
@@ -14,12 +13,12 @@ entity n_bit_1_mux_ea is
 end entity n_bit_1_mux_ea;
 
 architecture rtl of n_bit_1_mux_ea is
-  signal sel_vector : std_uloigc_vector(WIDTH - 1 downto 0);
+  type std_ulogic_vector_array is array (natural range <>) of std_ulogic_vector(WIDTH - 1 downto 0);
+  signal options : std_ulogic_vector_array(1 downto 0);
+  signal sel_vec : std_ulogic_vector(3 downto 0);
 begin
-  
-  sel_vector <= (others <= sel_i); -- Fill every bit of selection vector with value of sel_i
 
-  data_o <= (a_i AND NOT sel_i) OR (b_i AND sel_i);
-  
+  sel_vec <= (0 => sel_i, others => '0');
+  data_o <= options(to_integer(unsigned(sel_vec)));
   
 end architecture rtl;
