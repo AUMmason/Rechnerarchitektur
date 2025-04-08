@@ -61,6 +61,7 @@ begin
         report "The value of y_a=" & integer'image(to_integer(unsigned(y_a))) & "     y_b=" & integer'image(to_integer(unsigned(y_b)));
         up <= not(up);
       end loop;
+      report("All done!");
       wait;
     end process;
 

@@ -13,7 +13,7 @@ vcom Rechnerarchitektur/UE_4_Counter/testbench.vhd
 
 
 # Start Simulation
-vsim -voptargs="\+acc" -t ns testbench -wlf testbench_sim.wlf
+vsim -voptargs="\+acc" -t ps testbench -wlf testbench_sim.wlf
 
 # Label
 add wave -divider Inputs
@@ -28,6 +28,6 @@ add wave -divider Outputs
 add wave -noupdate -radix unsigned /testbench/y_a
 add wave -noupdate -radix unsigned /testbench/y_b
 
-run 100 us
+run 15 ns
 # Set Zoom Level {from ms} {to ms}
-WaveRestoreZoom {0 us} {1 us}
+WaveRestoreZoom {0 us} {15 ns}

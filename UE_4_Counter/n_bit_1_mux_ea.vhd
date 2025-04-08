@@ -18,6 +18,9 @@ architecture rtl of n_bit_1_mux_ea is
   signal sel_vec : std_ulogic_vector(3 downto 0);
 begin
 
+  options(0) <= a_i;
+  options(1) <= b_i;
+
   sel_vec <= (0 => sel_i, others => '0');
   data_o <= options(to_integer(unsigned(sel_vec)));
   
